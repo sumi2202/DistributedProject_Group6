@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "${workspaceFolderBasename}",
+            "classPaths": ["c:/Users/laury/Downloads/mysql-connector-j-8.0.33.jar", "c:/Users/laury/OneDrive - Ontario Tech University/Desktop/4th Year/Disributed Sytems/jeromq(1).jar"]
+        }
+    ]
+}
