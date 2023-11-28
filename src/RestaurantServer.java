@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.zeromq.SocketType;
 import org.zeromq.ZMQ;
 import org.zeromq.ZContext;
@@ -13,14 +17,32 @@ public class RestaurantServer {
             ZMQ.Socket publishMenus = context.createSocket(SocketType.PUB);
             publishMenus.connect("tcp://localhost:5558");
 
-            // Send notifications to the Updates Server
+            // ROUTER socket to receive subscription preferences from clients
+            ZMQ.Socket clientSubscriptions = context.createSocket(SocketType.ROUTER);
+            clientSubscriptions.bind("tcp://*:5559");
+
+             // List of restaurants that the client is subscribed to
+            List<String> subscribedRestaurants = new ArrayList<>();
+
+            while (true){
+                //get subscription choice from the clients 
+                String clientMessage = clientSubscriptions.recvStr(0);
+                subscribedRestaurants = Arrays.asList(clientMessage.split(","));
+
+                 // Send notifications to the Updates Server
             for (int i = 0; i < 10; i++) {
-                String notifications = "Notification " + i;
+                String restaurantName = "Restaurant" + i;
+                if (subscribedRestaurants.contains(restaurantName)) {
+                    String notifications = restaurantName + ": Notification " + i;                
                 pushUpdates.send(notifications);
                 // Send menus to the Updates Server
                 String menu = "Menu " + i;
                 publishMenus.send(menu);
             }
+
+           
+            }
         }
     }
+}
 }
