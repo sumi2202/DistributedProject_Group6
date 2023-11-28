@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import org.zeromq.SocketType;
 import org.zeromq.ZMQ;
 import org.zeromq.ZContext;
@@ -28,22 +30,23 @@ public class Client {
                 System.out.println("Enter email:");
                 String email = scanner.nextLine();
 
-                //authenticating the user based on the database
+                // authenticating the user based on the database
                 Database database = new Database();
                 boolean isAuthenticated = database.authenticate(customerId, firstName, lastName, email);
                 if (!isAuthenticated) {
                     System.out.println("Authentication failed");
                     continue;
-
-                    // Send subscription preferences to the Restaurant Server
-                    System.out.println("Enter restaurants to subscribe to (comma-separated):");
-                    String[] restaurants = scanner.nextLine().split(",");
-                    subscriptionSender.send(String.join(",", restaurants));
-
-                    // Accessing messages from the Updates Server
-                    String receivedUpdates = clientSubscriber.recvStr(0);
-                    System.out.println("Received: " + receivedUpdates);
                 }
+
+                // Send subscription preferences to the Restaurant Server
+                System.out.println("Enter restaurants to subscribe to (comma-separated):");
+                String[] restaurants = scanner.nextLine().split(",");
+                subscriptionSender.send(String.join(",", restaurants));
+
+                // Accessing messages from the Updates Server
+                String receivedUpdates = clientSubscriber.recvStr(0);
+                System.out.println("Received: " + receivedUpdates);
+            }
         }
     }
 }
