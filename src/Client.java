@@ -20,20 +20,16 @@ public class Client {
             // Scanner for user input
             try (Scanner scanner = new Scanner(System.in)) {
                 while (true) {
-                    // Authenticate user
-                    System.out.println("Hello, Welcome to FoodPlug, your number 1 food ordering service:");
-                    System.out.println("Enter customer ID:");
-                    String customerId = scanner.nextLine();
-                    System.out.println("Enter first name:");
-                    String firstName = scanner.nextLine();
-                    System.out.println("Enter last name:");
-                    String lastName = scanner.nextLine();
-                    System.out.println("Enter email:");
-                    String email = scanner.nextLine();
+                     // Authenticate user
+                     System.out.println("Hello, Welcome to FoodPlug, your number 1 food ordering service:");
+                     System.out.println("Enter first name:");
+                     String firstName = scanner.nextLine();
+                     System.out.println("Enter password:");
+                     String password = scanner.nextLine();
 
                     // authenticating the user based on the database
                     Database database = new Database();
-                    boolean isAuthenticated = database.authenticate(customerId, firstName, lastName, email);
+                    boolean isAuthenticated = database.authenticate(firstName, password);
                     if (!isAuthenticated) {
                         System.out.println("Authentication failed");
                         continue;

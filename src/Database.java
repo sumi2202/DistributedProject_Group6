@@ -19,14 +19,12 @@ public class Database {
     }
 
     //function to authenticate the user
-    public boolean authenticate(String customerId, String firstName, String lastName, String email) {
+    public boolean authenticate(String firstName, String password) {
         try {
-            String query = "SELECT * FROM customers WHERE customer_id = ? AND first_name = ? AND last_name = ? AND email = ?";
+            String query = "SELECT * FROM customers WHERE firstName = ? AND Password = ?";
             PreparedStatement statement = myConnection.prepareStatement(query);
-            statement.setString(1, customerId);
-            statement.setString(2, firstName);
-            statement.setString(3, lastName);
-            statement.setString(4, email);
+            statement.setString(1, firstName);
+            statement.setString(2, password);
 
             ResultSet myResult = statement.executeQuery();
             return myResult.next();
