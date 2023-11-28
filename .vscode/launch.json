@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "${workspaceFolderBasename}",
+            "classPaths": ["C:/Users/laury/OneDrive - Ontario Tech University/Desktop/4th Year/Disributed Sytems/FoodProject/DistributedProject_Group6/lib/mysql-connector-j-8.0.33.jar", "C:/Users/laury/OneDrive - Ontario Tech University/Desktop/4th Year/Disributed Sytems/FoodProject/DistributedProject_Group6/lib/jeromq(1).jar"]
+        }
+    ]
+}
