@@ -1,4 +1,4 @@
-//responsible for publish-subscribe mechanism , sends all updates to the restaurant
+package src;//responsible for publish-subscribe mechanism , sends all updates to the restaurant
 //acts as middleman between the restaurant server and the client  
 
 import org.zeromq.SocketType;
