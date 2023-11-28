@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import org.zeromq.SocketType;
 import org.zeromq.ZMQ;
@@ -24,6 +25,10 @@ public class RestaurantServer {
              // List of restaurants that the client is subscribed to
             List<String> subscribedRestaurants = new ArrayList<>();
 
+            // Random number generator for creating random menus
+            //to be changed 
+            Random myRandom = new Random();
+
             while (true){
                 //get subscription choice from the clients 
                 String clientMessage = clientSubscriptions.recvStr(0);
@@ -35,8 +40,11 @@ public class RestaurantServer {
                 if (subscribedRestaurants.contains(restaurantName)) {
                     String notifications = restaurantName + ": Notification " + i;                
                 pushUpdates.send(notifications);
+
+                // Generate a random menu
+                String menu = restaurantName + ": Menu " + myRandom.nextInt(100);
                 // Send menus to the Updates Server
-                String menu = "Menu " + i;
+               
                 publishMenus.send(menu);
             }
 
